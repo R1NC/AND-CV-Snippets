@@ -1,8 +1,8 @@
-### Introduction
+### Introduction:
 
 Android (JNI) code snippets of [OpenCV][1].
 
-### Requirements
+### Requirements:
 
 * [Android-NDK][2];
 
@@ -12,7 +12,7 @@ Why not the [original source][4]? OpenCV4Android offers universal makefiles and 
 
 For more details, refer to the [official docs][5].
 
-### Build
+### Build for yourself:
 
 Edit `Android.mk`, set `OPENCV_ROOT_PATH` to your own OpenCV4Android's root path:
 
