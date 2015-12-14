@@ -23,7 +23,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := FilterUtils
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/src \
 	$(CURRENT_ROOT_PATH)/Utils \
-  $(OPENCV_ROOT_PATH)/sdk/native/jni/include \
+  $(OPENCV_ROOT_PATH)/sdk/native/jni/include
 LOCAL_SRC_FILES := JNI.cxx \
 	$(CURRENT_ROOT_PATH)/JniUtils.cxx \
 	$(LOCAL_PATH)/src/FilterUtils.cxx
