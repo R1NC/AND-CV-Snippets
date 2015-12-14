@@ -1,17 +1,21 @@
-Introduction
-==========
+### Introduction
+
 Android (JNI) snippets of [OpenCV][1].
 
-Requirements
-==========
+### Requirements
+
 * [Android-NDK][2];
+
 * [OpenCV4Android][3];
+
 Why not [the original source][4]?
+
 OpenCV4Android offers universal makefiles and prebuilt static libraries, which can save lots of time on solving dependencies and compiling problems.
 
-Build
-==========
+### Build
+
 Edit `Android.mk`, set `OPENCV_ROOT_PATH` to your own OpenCV4Android's root path:
+
 ```shell
 LOCAL_PATH := $(call my-dir)
 CURRENT_ROOT_PATH := $(LOCAL_PATH)/../../..
