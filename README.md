@@ -24,5 +24,5 @@ OPENCV_LIBS_PATH := $(OPENCV_ROOT_PATH)/sdk/native/libs
 
 [1]: http://opencv.org/
 [2]: http://developer.android.com/tools/sdk/ndk/index.html
-[3]: http://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/O4A_SDK.html
+[3]: http://sourceforge.net/projects/opencvlibrary/files/opencv-android/
 [4]: https://github.com/Itseez/opencv
