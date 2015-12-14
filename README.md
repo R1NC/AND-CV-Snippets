@@ -19,7 +19,7 @@ Edit `Android.mk`, set `OPENCV_ROOT_PATH` to your own OpenCV4Android's root path
 ```shell
 LOCAL_PATH := $(call my-dir)
 CURRENT_ROOT_PATH := $(LOCAL_PATH)/../../..
-OPENCV_ROOT_PATH := $(CURRENT_ROOT_PATH)/../OpenCV-android-sdk
+OPENCV_ROOT_PATH := $(CURRENT_ROOT_PATH)/../OpenCV4Android
 OPENCV_LIBS_PATH := $(OPENCV_ROOT_PATH)/sdk/native/libs
 //...
 ```

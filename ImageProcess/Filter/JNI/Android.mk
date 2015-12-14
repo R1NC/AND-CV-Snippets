@@ -1,6 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 CURRENT_ROOT_PATH := $(LOCAL_PATH)/../../..
-OPENCV_ROOT_PATH := $(CURRENT_ROOT_PATH)/../OpenCV-android-sdk
+OPENCV_ROOT_PATH := $(CURRENT_ROOT_PATH)/../OpenCV4Android
 OPENCV_LIBS_PATH := $(OPENCV_ROOT_PATH)/sdk/native/libs
 
 #include $(CLEAR_VARS)
