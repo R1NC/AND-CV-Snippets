@@ -8,5 +8,5 @@ Requirements
 * [OpenCV4Android SDK][3];
 
 [1]: http://opencv.org/
-[2]: developer.android.com/tools/sdk/ndk/index.html
+[2]: http://developer.android.com/tools/sdk/ndk/index.html
 [3]: http://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/O4A_SDK.html
