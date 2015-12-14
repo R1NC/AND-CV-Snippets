@@ -1,6 +1,6 @@
 ### Introduction
 
-Android (JNI) snippets of [OpenCV][1].
+Android (JNI) code snippets of [OpenCV][1].
 
 ### Requirements
 
