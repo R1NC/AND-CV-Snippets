@@ -13,28 +13,26 @@
 extern "C" {
 #endif
 
-JNIEXPORT jbyteArray JNICALL
-Java_roid_cv_img_filter_FilterUtils_nativeGaussianBlur
-(JNIEnv *env, jclass clazz, jbyteArray imgData, jint imgWidth, jint imgHeight, jint gaussianKernelSize) {
-	//Check parameters:
-	if (!imgData) {
-		jniEnv->ThrowNew(jrefs::java::lang::NullPointerException->jclassRef, "imgData is null!");
-		return NULL;
+	JNIEXPORT jbyteArray JNICALL
+	Java_roid_opencv_imgproc_filter_FilterUtils_nativeGaussianBlur
+	(JNIEnv *env, jclass clazz, jbyteArray imgData, jint imgWidth, jint imgHeight, jint gaussianKernelSize) {
+		if (!imgData) {
+			throwNullPointerException(env, "imgData is null!");
+			return NULL;
+		}
+		int length = env->GetArrayLength(imgData);
+		if (length == 0) {
+			throwIllegalArgumentException(env, "imgData is empty!");
+			return NULL;
+		}
+		if (imgWidth <= 0 || imgHeight <= 0 || gaussianKernelSize <= 0) {
+			throwIllegalArgumentException(env, "imgWidth & imgHeight & gaussianKernelSize must be positive!");
+			return NULL;
+		}
+		unsigned char* src = jByteArrayToChars(env, imgData);
+		unsigned char* dst = gaussianBlur(src, imgWidth, imgHeight, gaussianKernelSize);
+		return charsToJByteArray(env, dst, length);
 	}
-	int length = env->GetArrayLength(imgData);
-	if (length == 0) {
-		jniEnv->ThrowNew(jrefs::java::lang::IllegalArgumentException->jclassRef, "imgData is empty!");
-		return NULL;
-	}
-	if (imgWidth <= 0 || imgHeight <= 0 || gaussianKernelSize <= 0) {
-		jniEnv->ThrowNew(jrefs::java::lang::IllegalArgumentException->jclassRef, "imgWidth & imgHeight & gaussianKernelSize must be positive!");
-		return NULL;
-	}
-
-	unsigned char* src = jByteArrayToChars(env, imgData);
-	unsigned char* dst = gaussianBlur(src, imgWidth, imgHeight, gaussianKernelSize);
-	return charsToJByteArray(env, dst, length);
-}
 
 #ifdef __cplusplus
 }
