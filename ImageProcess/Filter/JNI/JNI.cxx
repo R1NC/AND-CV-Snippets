@@ -7,8 +7,6 @@
 #include "src/FilterUtils.hxx"
 #include "../../../Utils/JniUtils.hxx"
 
-#include <android/log.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
