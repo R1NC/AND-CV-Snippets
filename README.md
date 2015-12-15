@@ -4,7 +4,7 @@ Android (JNI) code snippets of [OpenCV][1].
 
 ### Requirements:
 
-* [Android-NDK][2];
+* [Android-NDK][2] r10+, for a better support of C++11;
 
 * [OpenCV-Android][3];
 
