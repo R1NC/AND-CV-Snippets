@@ -4,5 +4,11 @@
 package roid.opencv.imgproc.filter;
 
 public class FilterUtils {
+
+  static {
+    System.loadLibrary("opencv_java3");
+    System.loadLibrary("ImageProcessFilterUtils");
+  }
+
   public static native byte[] nativeGaussianBlur(byte[] imgData, int imgWidth, int imgHeight, int gaussianKernelSize) throws NullPointerException, IllegalArgumentException;
 }
