@@ -9,11 +9,11 @@
 #include <string>
 #include <android/log.h>
 
-#define logV(tag, ...) __android_log_print(ANDROID_LOG_VERBOSE, tag, __VA_ARGS__)
-#define logD(tag, ...) __android_log_print(ANDROID_LOG_DEBUG, tag, __VA_ARGS__)
-#define logI(tag, ...) __android_log_print(ANDROID_LOG_INFO, tag, __VA_ARGS__)
-#define logW(tag, ...) __android_log_print(ANDROID_LOG_WARN, tag, __VA_ARGS__)
-#define logE(tag, ...) __android_log_print(ANDROID_LOG_ERROR, tag, __VA_ARGS__)
+#define aLogV(tag, ...) __android_log_print(ANDROID_LOG_VERBOSE, tag, __VA_ARGS__)
+#define aLogD(tag, ...) __android_log_print(ANDROID_LOG_DEBUG, tag, __VA_ARGS__)
+#define aLogI(tag, ...) __android_log_print(ANDROID_LOG_INFO, tag, __VA_ARGS__)
+#define aLogW(tag, ...) __android_log_print(ANDROID_LOG_WARN, tag, __VA_ARGS__)
+#define aLogE(tag, ...) __android_log_print(ANDROID_LOG_ERROR, tag, __VA_ARGS__)
 
 
 unsigned char* jByteArrayToChars(JNIEnv *env, jbyteArray array);
