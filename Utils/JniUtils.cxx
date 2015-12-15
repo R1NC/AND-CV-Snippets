@@ -21,9 +21,9 @@ jbyteArray charsToJByteArray(JNIEnv *env, unsigned char* chars, int length) {
 
 std::string jStringToStdString(JNIEnv* env, jstring jstr) {
   const char *utf = env->GetStringUTFChars(jstr, 0);
-	char *nativeStr = strdup(utf);
-	env->ReleaseStringUTFChars(jstr, utf);
-	return std::string(nativeStr);
+  char *nativeStr = strdup(utf);
+  env->ReleaseStringUTFChars(jstr, utf);
+  return std::string(nativeStr);
 }
 
 void throwNullPointerException(JNIEnv* env, const char * msg) {
