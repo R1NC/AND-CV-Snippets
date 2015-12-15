@@ -26,7 +26,7 @@ Java_roid_cv_img_filter_FilterUtils_nativeGaussianBlur
 		jniEnv->ThrowNew(jrefs::java::lang::IllegalArgumentException->jclassRef, "imgData is empty!");
 		return NULL;
 	}
-	if (imgWidth == 0 || imgHeight == 0 || gaussianKernelSize == 0) {
+	if (imgWidth <= 0 || imgHeight <= 0 || gaussianKernelSize <= 0) {
 		jniEnv->ThrowNew(jrefs::java::lang::IllegalArgumentException->jclassRef, "imgWidth & imgHeight & gaussianKernelSize must be positive!");
 		return NULL;
 	}
