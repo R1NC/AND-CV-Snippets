@@ -6,7 +6,6 @@ package roid.opencv.imgproc.filter;
 public class FilterUtils {
 
   static {
-    System.loadLibrary("opencv_java3");
     System.loadLibrary("ImageProcessFilterUtils");
   }
 
