@@ -30,10 +30,6 @@ Java_roid_cv_img_filter_FilterUtils_nativeGaussianBlur
 		jniEnv->ThrowNew(jrefs::java::lang::IllegalArgumentException->jclassRef, "imgWidth & imgHeight & gaussianKernelSize must be positive!");
 		return NULL;
 	}
-	if (gaussianKernelSize % 2 == 0) {
-		jniEnv->ThrowNew(jrefs::java::lang::IllegalArgumentException->jclassRef, "gaussianKernelSize must be odd!");
-		return NULL;
-	}
 
 	unsigned char* src = jByteArrayToChars(env, imgData);
 	unsigned char* dst = gaussianBlur(src, imgWidth, imgHeight, gaussianKernelSize);
