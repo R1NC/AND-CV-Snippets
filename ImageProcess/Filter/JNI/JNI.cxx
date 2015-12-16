@@ -1,8 +1,6 @@
 ﻿//
 // Created by rincliu on 2015/12/14.
 //
-#define ENABLE_ANDROID_LOG
-
 #include <jni.h>
 
 #include "src/FilterUtils.hxx"

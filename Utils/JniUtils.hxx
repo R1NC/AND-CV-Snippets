@@ -9,6 +9,8 @@
 #include <string>
 #include <android/log.h>
 
+#define ENABLE_ANDROID_LOG
+
 #ifdef ENABLE_ANDROID_LOG
 #define ALogV(tag, ...) __android_log_print(ANDROID_LOG_VERBOSE, tag, __VA_ARGS__)
 #define ALogD(tag, ...) __android_log_print(ANDROID_LOG_DEBUG, tag, __VA_ARGS__)
