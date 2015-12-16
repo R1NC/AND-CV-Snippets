@@ -9,12 +9,19 @@
 #include <string>
 #include <android/log.h>
 
+#ifdef ENABLE_ANDROID_LOGCAT
 #define ALogV(tag, ...) __android_log_print(ANDROID_LOG_VERBOSE, tag, __VA_ARGS__)
 #define ALogD(tag, ...) __android_log_print(ANDROID_LOG_DEBUG, tag, __VA_ARGS__)
 #define ALogI(tag, ...) __android_log_print(ANDROID_LOG_INFO, tag, __VA_ARGS__)
 #define ALogW(tag, ...) __android_log_print(ANDROID_LOG_WARN, tag, __VA_ARGS__)
 #define ALogE(tag, ...) __android_log_print(ANDROID_LOG_ERROR, tag, __VA_ARGS__)
-
+#else
+#define ALogV(tag, ...)
+#define ALogD(tag, ...)
+#define ALogI(tag, ...)
+#define ALogW(tag, ...)
+#define ALogE(tag, ...)
+#endif
 
 unsigned char* jByteArrayToChars(JNIEnv *env, jbyteArray array);
 
