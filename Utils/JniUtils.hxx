@@ -26,22 +26,4 @@ void throwNullPointerException(JNIEnv* env, const char * msg);
 
 void throwIllegalArgumentException(JNIEnv* env, const char * msg);
 
-namespace jrefs {
-  namespace java {
-    namespace lang {
-      struct jclass_NullPointerException {
-        jclass_NullPointerException(JNIEnv* env);
-        jclass jclassRef;
-      };
-      extern jclass_NullPointerException* NullPointerException;
-
-      struct jclass_IllegalArgumentException {
-        jclass_IllegalArgumentException(JNIEnv* env);
-        jclass jclassRef;
-      };
-      extern jclass_IllegalArgumentException* IllegalArgumentException;
-    }
-  }
-}
-
 #endif
