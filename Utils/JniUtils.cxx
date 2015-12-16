@@ -11,9 +11,22 @@ unsigned char* jByteArrayToChars(JNIEnv *env, jbyteArray jarray) {
   return chars;
 }
 
+unsigned char* jIntArrayToChars(JNIEnv *env, jintArray jarray) {
+  int length = env->GetArrayLength(jarray);
+  unsigned char* chars = new unsigned char[length];
+  env->GetIntArrayRegion(jarray, 0, length, reinterpret_cast<jint*>(chars));
+  return chars;
+}
+
 jbyteArray charsToJByteArray(JNIEnv *env, unsigned char* chars, int length) {
   jbyteArray array = env->NewByteArray(length);
   env->SetByteArrayRegion(array, 0, length, reinterpret_cast<jbyte*>(chars));
+  return array;
+}
+
+jintArray charsToJIntArray(JNIEnv *env, unsigned char* chars, int length) {
+  jintArray array = env->NewIntArray(length);
+  env->SetIntArrayRegion(array, 0, length, reinterpret_cast<jint*>(chars));
   return array;
 }
 

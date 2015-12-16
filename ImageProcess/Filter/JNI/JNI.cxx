@@ -1,6 +1,7 @@
 ﻿//
 // Created by rincliu on 2015/12/14.
 //
+#define ENABLE_ANDROID_LOG
 
 #include <jni.h>
 
@@ -11,25 +12,25 @@
 extern "C" {
 #endif
 
-	JNIEXPORT jbyteArray JNICALL
+	JNIEXPORT jintArray JNICALL
 	Java_roid_opencv_imgproc_filter_FilterUtils_nativeGaussianBlur
-	(JNIEnv *env, jclass clazz, jbyteArray imgData, jint imgWidth, jint imgHeight, jint gaussianKernelSize) {
-		if (!imgData) {
-			throwNullPointerException(env, "imgData is null!");
+	(JNIEnv *env, jclass clazz, jintArray imgPixels, jint imgWidth, jint imgHeight, jint gaussianKernelSize) {
+		if (!imgPixels) {
+			throwNullPointerException(env, "imgPixels is null!");
 			return NULL;
 		}
-		int length = env->GetArrayLength(imgData);
+		int length = env->GetArrayLength(imgPixels);
 		if (length == 0) {
-			throwIllegalArgumentException(env, "imgData is empty!");
+			throwIllegalArgumentException(env, "imgPixels is empty!");
 			return NULL;
 		}
 		if (imgWidth <= 0 || imgHeight <= 0 || gaussianKernelSize <= 0) {
 			throwIllegalArgumentException(env, "imgWidth & imgHeight & gaussianKernelSize must be positive!");
 			return NULL;
 		}
-		unsigned char* src = jByteArrayToChars(env, imgData);
+		unsigned char* src = jIntArrayToChars(env, imgPixels);
 		unsigned char* dst = gaussianBlur(src, imgWidth, imgHeight, gaussianKernelSize);
-		return charsToJByteArray(env, dst, length);
+		return charsToJIntArray(env, dst, length);
 	}
 
 #ifdef __cplusplus

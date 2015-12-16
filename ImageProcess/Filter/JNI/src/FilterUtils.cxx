@@ -9,8 +9,8 @@
 
 #include "FilterUtils.hxx"
 
-unsigned char* gaussianBlur(const unsigned char* imgData, const unsigned imgWidth, const unsigned imgHeight, unsigned gaussianKernelSize) {
-  cv::Mat src = cv::Mat(cv::Size(imgHeight, imgWidth), CV_8UC4);
+unsigned char* gaussianBlur(unsigned char* imgPixels, const unsigned imgWidth, const unsigned imgHeight, unsigned gaussianKernelSize) {
+  cv::Mat src(imgHeight, imgWidth, CV_8UC4, imgPixels, cv::Mat::AUTO_STEP);
   cv::Mat dst = src.clone();
   //The width & height of Gaussian-Kernel-Size must be positive and odd.
   gaussianKernelSize = std::max(gaussianKernelSize, (unsigned)1);

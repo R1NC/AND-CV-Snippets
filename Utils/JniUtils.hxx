@@ -9,7 +9,7 @@
 #include <string>
 #include <android/log.h>
 
-#ifdef ENABLE_ANDROID_LOGCAT
+#ifdef ENABLE_ANDROID_LOG
 #define ALogV(tag, ...) __android_log_print(ANDROID_LOG_VERBOSE, tag, __VA_ARGS__)
 #define ALogD(tag, ...) __android_log_print(ANDROID_LOG_DEBUG, tag, __VA_ARGS__)
 #define ALogI(tag, ...) __android_log_print(ANDROID_LOG_INFO, tag, __VA_ARGS__)
@@ -25,7 +25,11 @@
 
 unsigned char* jByteArrayToChars(JNIEnv *env, jbyteArray array);
 
-jbyteArray charsToJByteArray(JNIEnv *env, unsigned char* chars, int len);
+unsigned char* jIntArrayToChars(JNIEnv *env, jintArray array);
+
+jbyteArray charsToJByteArray(JNIEnv *env, unsigned char* chars, int length);
+
+jintArray charsToJIntArray(JNIEnv *env, unsigned char* chars, int length);
 
 std::string jStringToStdString(JNIEnv* env, jstring jstr);
 
