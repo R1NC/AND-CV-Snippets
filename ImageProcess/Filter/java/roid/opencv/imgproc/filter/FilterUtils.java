@@ -11,14 +11,17 @@ public class FilterUtils {
     System.loadLibrary("ImageProcessFilterUtils");
   }
 
-  public static void gaussianBlur(Bitmap bitmap, int gaussianKernelSize) {
+  public static Bitmap gaussianBlur(Bitmap bitmap, int gaussianKernelSize) {
     if (bitmap != null && !bitmap.isRecycled()) {
       final int W = bitmap.getWidth(), H = bitmap.getHeight();
       int[] srcPixels = new int[W * H];
       bitmap.getPixels(srcPixels, 0, W, 0, 0, W, H);
       int[] dstPixels = nativeGaussianBlur(srcPixels, W, H, gaussianKernelSize);
-      bitmap.setPixels(dstPixels, 0, W, 0, 0, W, H);
+      Bitmap newBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+      newBitmap.setPixels(dstPixels, 0, W, 0, 0, W, H);
+      return newBitmap;
     }
+    return null;
   }
 
   private static native int[] nativeGaussianBlur(int[] imgPixels, int imgWidth, int imgHeight, int gaussianKernelSize);
