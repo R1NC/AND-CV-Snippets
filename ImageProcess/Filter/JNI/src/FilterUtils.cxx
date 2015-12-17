@@ -17,7 +17,7 @@ unsigned char* gaussianBlur(unsigned char* imgPixels, const unsigned imgWidth, c
   if (gaussianKernelSize % 2 != 1) {
     gaussianKernelSize++;
   }
-  cv::Size mGaussianKernelSize = cv::Size(gaussianKernelSize, gaussianKernelSize);
+  cv::Size mGaussianKernelSize(gaussianKernelSize, gaussianKernelSize);
   cv::GaussianBlur(src, dst, mGaussianKernelSize, 0, 0);
   return dst.data;
 }
