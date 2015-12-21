@@ -16,7 +16,7 @@ public class FilterUtils {
     });
   }
 
-  private Bitmap processBitmap(Bitmap bitmap, PixelsProcessor processor) {
+  private static Bitmap processBitmap(Bitmap bitmap, PixelsProcessor processor) {
     Bitmap newBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
     if (bitmap != null && !bitmap.isRecycled() && processor != null) {
       final int W = bitmap.getWidth(), H = bitmap.getHeight();
