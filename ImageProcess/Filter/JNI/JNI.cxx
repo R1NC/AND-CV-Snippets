@@ -34,6 +34,17 @@ extern "C" {
 		return charsToJIntArray(env, dst, env->GetArrayLength(imgPixels));
 	}
 
+	JNIEXPORT jintArray JNICALL
+	Java_roid_opencv_imgproc_filter_FilterUtils_nativeMedianBlur
+	(JNIEnv *env, jclass clazz, jintArray imgPixels, jint imgWidth, jint imgHeight, jint kernelSize) {
+		if (checkFilterParameters(env, imgPixels, imgWidth, imgHeight, kernelSize) == JNI_FALSE) {
+			return NULL;
+		}
+		unsigned char* src = jIntArrayToChars(env, imgPixels);
+		unsigned char* dst = medianBlur(src, imgWidth, imgHeight, kernelSize);
+		return charsToJIntArray(env, dst, env->GetArrayLength(imgPixels));
+	}
+
 	jboolean checkFilterParameters(JNIEnv *env, jintArray imgPixels, jint imgWidth, jint imgHeight, jint kernelSize) {
 		if (!imgPixels) {
 			throwNullPointerException(env, "imgPixels is null!");

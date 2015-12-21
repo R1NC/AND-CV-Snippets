@@ -25,6 +25,15 @@ public class FilterUtils {
     });
   }
 
+  public static Bitmap medianBlur(Bitmap bitmap, final int kernelSize) {
+    return processBitmap(bitmap, new PixelsMatrixProcessor() {
+      @Override
+      public int[] onProcess(int[] srcPixels, int width, int height) {
+        return nativeMedianBlur(srcPixels, width, height, kernelSize);
+      }
+    });
+  }
+
   private static Bitmap processBitmap(Bitmap bitmap, PixelsMatrixProcessor processor) {
     Bitmap newBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
     if (bitmap != null && !bitmap.isRecycled() && processor != null) {
@@ -45,7 +54,9 @@ public class FilterUtils {
     System.loadLibrary("ImageProcessFilterUtils");
   }
 
+  private static native int[] nativeBoxFilter(int[] imgPixels, int imgWidth, int imgHeight, int kernelSize);
+
   private static native int[] nativeGaussianBlur(int[] imgPixels, int imgWidth, int imgHeight, int kernelSize);
 
-  private static native int[] nativeBoxFilter(int[] imgPixels, int imgWidth, int imgHeight, int kernelSize);
+  private static native int[] nativeMedianBlur(int[] imgPixels, int imgWidth, int imgHeight, int kernelSize);
 }

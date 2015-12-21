@@ -9,4 +9,6 @@ unsigned char* boxFilter(unsigned char* imgPixels, const unsigned imgWidth, cons
 
 unsigned char* gaussianBlur(unsigned char* imgPixels, const unsigned imgWidth, const unsigned imgHeight, unsigned kernelSize);
 
+unsigned char* medianBlur(unsigned char* imgPixels, const unsigned imgWidth, const unsigned imgHeight, unsigned kernelSize);
+
 #endif
