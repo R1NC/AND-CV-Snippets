@@ -18,6 +18,15 @@ unsigned char* boxFilter(unsigned char* imgPixels, const unsigned imgWidth, cons
   return dst.data;
 }
 
+unsigned char* bilateralFilter(unsigned char* imgPixels, const unsigned imgWidth, const unsigned imgHeight, unsigned kernelSize) {
+  cv::Mat src(imgHeight, imgWidth, CV_8UC4, imgPixels, cv::Mat::AUTO_STEP);
+  cv::Mat dst = src.clone();
+  kernelSize = std::max(kernelSize, (unsigned)1);
+  double sigmaColor = kernelSize * 2, sigmaSpace = kernelSize / 2;
+  cv::bilateralFilter(src, dst, kernelSize, sigmaColor, sigmaSpace);
+  return dst.data;
+}
+
 unsigned char* gaussianBlur(unsigned char* imgPixels, const unsigned imgWidth, const unsigned imgHeight, unsigned kernelSize) {
   cv::Mat src(imgHeight, imgWidth, CV_8UC4, imgPixels, cv::Mat::AUTO_STEP);
   cv::Mat dst = src.clone();

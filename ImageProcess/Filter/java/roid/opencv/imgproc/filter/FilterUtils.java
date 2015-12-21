@@ -16,6 +16,15 @@ public class FilterUtils {
     });
   }
 
+  public static Bitmap bilateralFilter(Bitmap bitmap, final int kernelSize) {
+    return processBitmap(bitmap, new PixelsMatrixProcessor() {
+      @Override
+      public int[] onProcess(int[] srcPixels, int width, int height) {
+        return nativeBilateralFilter(srcPixels, width, height, kernelSize);
+      }
+    });
+  }
+
   public static Bitmap gaussianBlur(Bitmap bitmap, final int kernelSize) {
     return processBitmap(bitmap, new PixelsMatrixProcessor() {
       @Override
@@ -55,6 +64,8 @@ public class FilterUtils {
   }
 
   private static native int[] nativeBoxFilter(int[] imgPixels, int imgWidth, int imgHeight, int kernelSize);
+
+  private static native int[] nativeBilateralFilter(int[] imgPixels, int imgWidth, int imgHeight, int kernelSize);
 
   private static native int[] nativeGaussianBlur(int[] imgPixels, int imgWidth, int imgHeight, int kernelSize);
 
