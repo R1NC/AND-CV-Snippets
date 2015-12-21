@@ -7,16 +7,25 @@ import android.graphics.Bitmap;
 
 public class FilterUtils {
 
-  public static Bitmap gaussianBlur(Bitmap bitmap, final int gaussianKernelSize) {
-    return processBitmap(bitmap, new PixelsProcessor() {
+  public static Bitmap boxFilter(Bitmap bitmap, final int kernelSize) {
+    return processBitmap(bitmap, new PixelsMatrixProcessor() {
       @Override
       public int[] onProcess(int[] srcPixels, int width, int height) {
-        return nativeGaussianBlur(srcPixels, width, height, gaussianKernelSize);
+        return nativeBoxFilter(srcPixels, width, height, kernelSize);
       }
     });
   }
 
-  private static Bitmap processBitmap(Bitmap bitmap, PixelsProcessor processor) {
+  public static Bitmap gaussianBlur(Bitmap bitmap, final int kernelSize) {
+    return processBitmap(bitmap, new PixelsMatrixProcessor() {
+      @Override
+      public int[] onProcess(int[] srcPixels, int width, int height) {
+        return nativeGaussianBlur(srcPixels, width, height, kernelSize);
+      }
+    });
+  }
+
+  private static Bitmap processBitmap(Bitmap bitmap, PixelsMatrixProcessor processor) {
     Bitmap newBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
     if (bitmap != null && !bitmap.isRecycled() && processor != null) {
       final int W = bitmap.getWidth(), H = bitmap.getHeight();
@@ -28,7 +37,7 @@ public class FilterUtils {
     return newBitmap;
   }
 
-  private interface PixelsProcessor {
+  private interface PixelsMatrixProcessor {
     int[] onProcess(int[] srcPixels, int width, int height);
   }
 
@@ -36,5 +45,7 @@ public class FilterUtils {
     System.loadLibrary("ImageProcessFilterUtils");
   }
 
-  private static native int[] nativeGaussianBlur(int[] imgPixels, int imgWidth, int imgHeight, int gaussianKernelSize);
+  private static native int[] nativeGaussianBlur(int[] imgPixels, int imgWidth, int imgHeight, int kernelSize);
+
+  private static native int[] nativeBoxFilter(int[] imgPixels, int imgWidth, int imgHeight, int kernelSize);
 }
