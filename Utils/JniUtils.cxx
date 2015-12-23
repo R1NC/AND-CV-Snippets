@@ -38,9 +38,13 @@ std::string jStringToStdString(JNIEnv* env, jstring jstr) {
 }
 
 void throwNullPointerException(JNIEnv* env, const char * msg) {
-  env->ThrowNew(env->FindClass("java/lang/NullPointerException"), msg);
+  jclass clazz = env->FindClass("java/lang/NullPointerException");
+  env->ThrowNew(clazz, msg);
+  env->DeleteLocalRef(clazz);
 }
 
 void throwIllegalArgumentException(JNIEnv* env, const char * msg) {
-  env->ThrowNew(env->FindClass("java/lang/IllegalArgumentException"), msg);
+  jclass clazz = env->FindClass("java/lang/IllegalArgumentException");
+  env->ThrowNew(clazz, msg);
+  env->DeleteLocalRef(clazz);
 }
