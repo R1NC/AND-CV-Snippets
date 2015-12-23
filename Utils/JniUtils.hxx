@@ -25,11 +25,7 @@
 #define ALogE(tag, ...)
 #endif
 
-unsigned char* jByteArrayToChars(JNIEnv *env, jbyteArray array);
-
 unsigned char* jIntArrayToChars(JNIEnv *env, jintArray array);
-
-jbyteArray charsToJByteArray(JNIEnv *env, unsigned char* chars, int length);
 
 jintArray charsToJIntArray(JNIEnv *env, unsigned char* chars, int length);
 
