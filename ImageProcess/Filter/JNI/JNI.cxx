@@ -83,7 +83,9 @@ extern "C" {
 		int* imgPixelsInts = env->GetIntArrayElements(imgPixels, 0);
 		unsigned char* dst = processFunc((unsigned char*)imgPixelsInts, imgWidth, imgHeight, kernelSize);
 		jintArray res = charsToJIntArray(env, dst, env->GetArrayLength(imgPixels));
+		// `imgPixelsInts` comes from JNI, so it cannot be freed with `delete[]`;
 		env->ReleaseIntArrayElements(imgPixels, imgPixelsInts, 0);
+		delete[] dst;
 		return res;
 	}
 
