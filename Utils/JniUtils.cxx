@@ -5,10 +5,13 @@
 #include "JniUtils.hxx"
 
 unsigned char* jIntArrayToChars(JNIEnv *env, jintArray jarray) {
+  /*
   int length = env->GetArrayLength(jarray);
   unsigned char* chars = new unsigned char[length];
   env->GetIntArrayRegion(jarray, 0, length, reinterpret_cast<jint*>(chars));
   return chars;
+  */
+  return (unsigned char*)env->GetIntArrayElements(jarray, 0);
 }
 
 jintArray charsToJIntArray(JNIEnv *env, unsigned char* chars, int length) {
