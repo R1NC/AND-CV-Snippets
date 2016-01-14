@@ -25,8 +25,6 @@
 #define ALogE(tag, ...)
 #endif
 
-unsigned char* jIntArrayToChars(JNIEnv *env, jintArray array);
-
 jintArray charsToJIntArray(JNIEnv *env, unsigned char* chars, int length);
 
 std::string jStringToStdString(JNIEnv* env, jstring jstr);

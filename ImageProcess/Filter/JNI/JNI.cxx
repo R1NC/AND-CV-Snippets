@@ -2,6 +2,7 @@
 // Created by rincliu on 2015/12/14.
 //
 #include <jni.h>
+#include <functional>
 
 #include "src/FilterUtils.hxx"
 #include "../../../Utils/JniUtils.hxx"
@@ -12,15 +13,18 @@ extern "C" {
 
 	jboolean checkFilterParameters(JNIEnv *env, jintArray imgPixels, jint imgWidth, jint imgHeight, jint kernelSize);
 
+	jintArray processPixels(JNIEnv *env, jintArray imgPixels, jint imgWidth, jint imgHeight, jint kernelSize, std::function<unsigned char*(unsigned char*, jint, jint, jint)> processFunc);
+
 	JNIEXPORT jintArray JNICALL
 	Java_roid_opencv_imgproc_filter_FilterUtils_nativeBoxFilter
 	(JNIEnv *env, jclass clazz, jintArray imgPixels, jint imgWidth, jint imgHeight, jint kernelSize) {
 		if (checkFilterParameters(env, imgPixels, imgWidth, imgHeight, kernelSize) == JNI_FALSE) {
 			return NULL;
 		}
-		unsigned char* src = jIntArrayToChars(env, imgPixels);
-		unsigned char* dst = boxFilter(src, imgWidth, imgHeight, kernelSize);
-		return charsToJIntArray(env, dst, env->GetArrayLength(imgPixels));
+		auto processFunc = [](unsigned char* imgPixelsChars, jint imgWidth, jint imgHeight, jint kernelSize) -> unsigned char* {
+			return boxFilter(imgPixelsChars, imgWidth, imgHeight, kernelSize);
+		};
+		return processPixels(env, imgPixels, imgWidth, imgHeight, kernelSize, processFunc);
 	}
 
 	JNIEXPORT jintArray JNICALL
@@ -29,9 +33,10 @@ extern "C" {
 		if (checkFilterParameters(env, imgPixels, imgWidth, imgHeight, kernelSize) == JNI_FALSE) {
 			return NULL;
 		}
-		unsigned char* src = jIntArrayToChars(env, imgPixels);
-		unsigned char* dst = bilateralFilter(src, imgWidth, imgHeight, kernelSize);
-		return charsToJIntArray(env, dst, env->GetArrayLength(imgPixels));
+		auto processFunc = [](unsigned char* imgPixelsChars, jint imgWidth, jint imgHeight, jint kernelSize) -> unsigned char* {
+			return bilateralFilter(imgPixelsChars, imgWidth, imgHeight, kernelSize);
+		};
+		return processPixels(env, imgPixels, imgWidth, imgHeight, kernelSize, processFunc);
 	}
 
 	JNIEXPORT jintArray JNICALL
@@ -40,9 +45,10 @@ extern "C" {
 		if (checkFilterParameters(env, imgPixels, imgWidth, imgHeight, kernelSize) == JNI_FALSE) {
 			return NULL;
 		}
-		unsigned char* src = jIntArrayToChars(env, imgPixels);
-		unsigned char* dst = gaussianBlur(src, imgWidth, imgHeight, kernelSize);
-		return charsToJIntArray(env, dst, env->GetArrayLength(imgPixels));
+		auto processFunc = [](unsigned char* imgPixelsChars, jint imgWidth, jint imgHeight, jint kernelSize) -> unsigned char* {
+			return gaussianBlur(imgPixelsChars, imgWidth, imgHeight, kernelSize);
+		};
+		return processPixels(env, imgPixels, imgWidth, imgHeight, kernelSize, processFunc);
 	}
 
 	JNIEXPORT jintArray JNICALL
@@ -51,9 +57,10 @@ extern "C" {
 		if (checkFilterParameters(env, imgPixels, imgWidth, imgHeight, kernelSize) == JNI_FALSE) {
 			return NULL;
 		}
-		unsigned char* src = jIntArrayToChars(env, imgPixels);
-		unsigned char* dst = medianBlur(src, imgWidth, imgHeight, kernelSize);
-		return charsToJIntArray(env, dst, env->GetArrayLength(imgPixels));
+		auto processFunc = [](unsigned char* imgPixelsChars, jint imgWidth, jint imgHeight, jint kernelSize) -> unsigned char* {
+			return medianBlur(imgPixelsChars, imgWidth, imgHeight, kernelSize);
+		};
+		return processPixels(env, imgPixels, imgWidth, imgHeight, kernelSize, processFunc);
 	}
 
 	jboolean checkFilterParameters(JNIEnv *env, jintArray imgPixels, jint imgWidth, jint imgHeight, jint kernelSize) {
@@ -70,6 +77,14 @@ extern "C" {
 			return JNI_FALSE;
 		}
 		return JNI_TRUE;
+	}
+
+	jintArray processPixels(JNIEnv *env, jintArray imgPixels, jint imgWidth, jint imgHeight, jint kernelSize, std::function<unsigned char*(unsigned char*, jint, jint, jint)> processFunc) {
+		int* imgPixelsInts = env->GetIntArrayElements(imgPixels, 0);
+		unsigned char* dst = processFunc((unsigned char*)imgPixelsInts, imgWidth, imgHeight, kernelSize);
+		jintArray res = charsToJIntArray(env, dst, env->GetArrayLength(imgPixels));
+		env->ReleaseIntArrayElements(imgPixels, imgPixelsInts, 0);
+		return res;
 	}
 
 #ifdef __cplusplus
