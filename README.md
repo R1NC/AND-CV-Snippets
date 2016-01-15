@@ -14,7 +14,7 @@ For more details, refer to the [official docs][5].
 
 ### Build for yourself:
 
-Edit `Android.mk`, set `OPENCV_ROOT_PATH` to your own OpenCV-Android's root path.
+Edit `Android.mk`, set `OPENCV_ROOT_PATH` to your own root path of OpenCV-Android.
 
 [1]: http://opencv.org/
 [2]: http://developer.android.com/tools/sdk/ndk/index.html
